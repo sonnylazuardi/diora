@@ -90,31 +90,45 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
 
 
 .controller('HomeCtrl', function($scope, $rootScope, simpleLogin) {
-    $rootScope.loginShow = true;
+  $rootScope.loginShow = false;
 })
 
 .controller('PlayCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+  $rootScope.loginShow = false;
 })
 
 .controller('TimelineCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+  $rootScope.loginShow = false;
 })
 
 .controller('FriendsCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+  $rootScope.loginShow = false;
 })
 
-.controller('SearchCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+.controller('SearchCtrl', function($scope, $rootScope, simpleLogin,Search) {
+  $rootScope.loginShow = false;
+  $scope.qsearch = '';
+  $scope.search = function(){
+  	console.log($scope.qsearch);
+  	Search.search($scope.qsearch).then(function(data){
+		$scope.data = data;
+  	});
+  }
 })
 
 .controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+  $rootScope.loginShow = false;
 })
 
-.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend) {
+  $rootScope.loginShow = false;
+ 
+  Trend.getToday().then(function(data){
+  	$scope.dataToday = data;
+  });
+  Trend.getThisMonth().then(function(data){
+  	$scope.dataThisMonth = data; 
+  });
 })
 
 .controller('FavoriteCtrl', function($scope, $rootScope, simpleLogin) {
