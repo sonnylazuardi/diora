@@ -33,5 +33,12 @@ angular.module('inklusik.controllers', [])
 
 .controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin) {
   $rootScope.hide = true;
-});
+})
 
+.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('FavoriteCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+});

@@ -35,6 +35,11 @@ angular.module('inklusik.routes', ['simpleLogin'])
       url:'/playlist',
       templateUrl: "templates/playlist.html",
       controller: 'PlaylistCtrl'
+    },
+    'trending': {
+      url:'/trending',
+      templateUrl: "templates/trending.html",
+      controller: 'TrendingCtrl'
     }
   })
   
