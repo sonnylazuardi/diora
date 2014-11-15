@@ -6,41 +6,10 @@ angular.module('inklusik.routes', ['simpleLogin'])
       controller: 'LoginCtrl',
       animation: 'slide-in-up'
     },
-    'play': {
-      url: "/play/:name",
-      templateUrl: "templates/play.html",
-      controller: 'PlayCtrl',
-      authRequired: true // must authenticate before viewing this page
-    },
-    'play/guest': {
-      url: "/guestplay/:name",
-      templateUrl: "templates/play.html",
-      controller: 'PlayGuestCtrl',
-    },
-    'browse':{
-      url: "/browse",
-      templateUrl: "templates/browse.html",
-      controller: 'BrowseCtrl'
-    },
-    'detail':{
-      url: "/detail/:name",
-      templateUrl: "templates/detail.html",
-      controller: 'DetailCtrl'
-    },
-    'about':{
-      url: "/about",
-      templateUrl: "templates/about.html",
-      controller: 'AboutCtrl'
-    },
-    'help':{
-      url: "/help",
-      templateUrl: "templates/help.html",
-      controller: 'AboutCtrl'
-    },
-    'search':{
-      url: "/search",
-      templateUrl: "templates/search.html",
-      controller: 'SearchCtrl'
+    'home': {
+      url: "/home",
+      templateUrl: "templates/home.html",
+      controller: 'HomeCtrl',
     }
   })
   
@@ -64,7 +33,7 @@ angular.module('inklusik.routes', ['simpleLogin'])
       }
     });
     // routes which are not in our map are redirected to /home
-    $urlRouterProvider.otherwise('/browse');
+    $urlRouterProvider.otherwise('/home');
   })
 
   .run(function($rootScope, $location, simpleLogin, ROUTES, loginRedirectPath) {

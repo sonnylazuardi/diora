@@ -29,8 +29,8 @@
     height: 100%;
     z-index: 1000;
     position: fixed;
-    color: #fff;
-    background: #57ba47;
+    color: #27ae60;
+    background: #fff;
 }
 
 .scroll-refresher {
@@ -62,8 +62,12 @@
 	height: 100% !important;
 }
 
+.login-page {
+    padding: 100px 20px;
+}
+
 .login-page .logo {
-	background: url('../img/logo_inklusik.png') no-repeat;
+	background: url('../img/logo.png') no-repeat;
     background-size: contain;
 	width: 200px;
 	height: 200px;
