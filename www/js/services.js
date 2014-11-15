@@ -74,4 +74,58 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
     return def.promise;
   }
   return self;
+})
+
+.factory('Trend', function($http, serverUrl, $q){
+  var self = this;
+  self.getToday = function(){
+    var def = $q.defer();
+    $http.get(serverUrl+'music/popular/today?limit=8').success(function(data){
+      var song = data.data;
+      for (var i=0;i<song.length;i++){
+        if (song[i].CoverArtFilename != null && song[i].CoverArtFilename != "")
+          song[i].CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song[i].CoverArtFilename;
+        else 
+          song[i].CoverArtFilename = 'img/album.jpg';
+      }
+      def.resolve(song);
+    });
+    return def.promise;
+  }
+  self.getThisMonth = function(){
+    var def = $q.defer();
+    $http.get(serverUrl+'music/popular/month?limit=8').success(function(data){
+      var song = data.data;
+      for (var i=0;i<song.length;i++){
+        if (song[i].CoverArtFilename != null && song[i].CoverArtFilename != "")
+          song[i].CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song[i].CoverArtFilename;
+        else 
+          song[i].CoverArtFilename = 'img/album.jpg';
+      }
+      def.resolve(song);
+    });
+    return def.promise;
+  }
+  return self;
+})
+
+.factory('Search', function($http, serverUrl, $q){
+  var self = this;
+  self.search = function(query){
+    var def = $q.defer();
+    console.log(serverUrl+'music/search/song?query='+query);
+    $http.get(serverUrl+'music/search/song?query='+query).success(function(data){
+      console.log(data);
+      var song = data.data;
+      for (var i=0;i<song.length;i++){
+        if (song[i].CoverArtFilename != null && song[i].CoverArtFilename != "")
+          song[i].CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song[i].CoverArtFilename;
+        else 
+          song[i].CoverArtFilename = 'img/album.jpg';
+      }
+      def.resolve(song);
+    });
+    return def.promise;
+  }
+  return self;
 });

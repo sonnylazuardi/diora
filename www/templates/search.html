@@ -3,33 +3,15 @@
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" ng-model="qsearch" ng-enter="search()">
       </label>
     </div>
     <div class="row unlimited-items music-item">
-      <div class="col">
-        <div style="background: url('img/linkinpark.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 75px; width: 75px; background-color: #fff; border-radius:25%; margin: 0px auto; padding-top:15px;">
+      <div class="col" ng-repeat="song in data">
+        <div style="background: url('{{song.CoverFileArtName}}'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 75px; width: 75px; background-color: #fff; border-radius:25%; margin: 0px auto; padding-top:15px;">
         </div>
-        <h3>Castle of Glass</h3>
-        <h4>Linkin Park</h4>
-      </div>
-      <div class="col item-genre">
-        <div style="background: url('img/linkinpark.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 75px; width: 75px; background-color: #fff; border-radius:25%; margin: 0px auto; padding-top:15px;">
-        </div>
-        <h3>Castle of Glass</h3>
-        <h4>Linkin Park</h4>
-      </div>
-      <div class="col item-genre">
-        <div style="background: url('img/linkinpark.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 75px; width: 75px; background-color: #fff; border-radius:25%; margin: 0px auto; padding-top:15px;">
-        </div>
-        <h3>Castle of Glass</h3>
-        <h4>Linkin Park</h4>
-      </div>
-      <div class="col item-genre">
-        <div style="background: url('img/linkinpark.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 75px; width: 75px; background-color: #fff; border-radius:25%; margin: 0px auto; padding-top:15px;">
-        </div>
-        <h3>Castle of Glass</h3>
-        <h4>Linkin Park</h4>
+        <h3>{{song.SongName}}</h3>
+        <h4>{{song.ArtistName}}</h4>
       </div>
     </div>
   </ion-content>
