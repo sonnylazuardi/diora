@@ -12,7 +12,7 @@ angular.module('inklusik.routes', ['simpleLogin'])
       controller: 'HomeCtrl'
     },
     'play': {
-      url: "/play",
+      url: "/play/:song_id",
       controller: 'PlayCtrl',
       templateUrl: "templates/play.html"
     }

@@ -10,12 +10,27 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
     }
 })
 
-.controller('PlayCtrl', function($scope, $rootScope, TDCardDelegate, Player) {
+.controller('PlayCtrl', function($scope, $rootScope, TDCardDelegate, Player, $stateParams, Song, Lyric) {
     $rootScope.loginShow = false;
     $rootScope.playShow = true;
-    console.log('CARDS CTRL');
+
+    var song_id = $stateParams.song_id;
+    $scope.song;
+    $scope.audioPlaying;
+    console.log(song_id);
+    $scope.lyric = '';
+    Song.getById(song_id).then(function(data) {
+        $scope.song = data;
+        $scope.audioPlaying = Player($scope.song.filename);
+        timer = timerFunc;
+        $scope.isPlaying = true;
+        Lyric.get(data.ArtistName, data.SongName).then(function(data2) {
+            $scope.lyric = data2;
+        });
+    });
+    
     var cardTypes = [
-        { image: 'https://pbs.twimg.com/profile_images/479740132258361344/KaYdH9hE.jpeg' },
+        { title: 0 },
     ];
 
     $scope.cards = Array.prototype.slice.call(cardTypes, 0);
@@ -29,18 +44,30 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
         newCard.id = Math.random();
         $scope.cards.push(angular.extend({}, newCard));
     }
-    $scope.audioPlaying = Player('http://webaudioplayground.appspot.com/sounds/guitar.ogg');
+    
     $scope.progressBar = 0;
+    $scope.isPlaying = false;
+    $scope.control = function() {
+        $scope.isPlaying = !$scope.isPlaying;
+        if ($scope.isPlaying) {
+            $scope.audioPlaying.play();
+        } else {
+            $scope.audioPlaying.pause();
+        }
+        timer = timerFunc;
+    }
     console.log($scope.audioPlaying);
 
     var timer;
     var timerFunc = setInterval(function() {
-        if (!$scope.audioPlaying.paused) {
-            if (!isNaN($scope.audioPlaying.progress)) {
-                $scope.progressBar = parseInt($scope.audioPlaying.progress * 100);
+        if ($scope.audioPlaying) {
+            if (!$scope.audioPlaying.paused) {
+                if (!isNaN($scope.audioPlaying.progress)) {
+                    $scope.progressBar = parseInt($scope.audioPlaying.progress * 100);
+                }
+            } else {
+                clearInterval(timer);
             }
-        } else {
-            clearInterval(timer);
         }
     }, 100);
 
@@ -48,8 +75,6 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
         $scope.audioPlaying.setProgress(val/100);
         timer = timerFunc;
     }
-
-    timer = timerFunc;
 })
 
 .controller('CardCtrl', function($scope, TDCardDelegate) {
