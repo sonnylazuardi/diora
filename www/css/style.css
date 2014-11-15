@@ -32,7 +32,8 @@
     z-index: 1000;
     position: fixed;
     color: #27ae60;
-    background: #fff;
+    background: url('../img/play_bg.jpg') no-repeat;
+    background-size: 100% 100%;
 }
 
 .scroll-refresher {
@@ -67,8 +68,23 @@
 }
 
 .login-page {
+	
 	width: 100%;
 	height: 100% !important;
+}
+
+.login-page .button {
+	border-width:0px;
+}
+
+.login-page .fb {
+	background-color: #2C6BB4;
+	font-family: roboto;
+}
+
+.login-page .migme {
+	background-color: #DBD622;
+	font-family: roboto;
 }
 
 .login-page {
@@ -76,18 +92,19 @@
 }
 
 .login-page .logo {
-	background: url('../img/logo.png') no-repeat;
+	background: url('../img/logo-white.png') no-repeat;
     background-size: contain;
-	width: 200px;
-	height: 200px;
+	width: 100px;
+	height: 100px;
 	margin: 0 auto;
 }
 
 .hint {
-	color: $light;
-	font-weight: bold;
+	color: #fff;
+	font-family: roboto-thin;
 	text-align: center;
 	margin: 20px 0;
+	font-size:20px;
 }
 
 .menu {
@@ -441,6 +458,7 @@ hr { display: block; height: 1px;
 }
 
 .play-div .lyric {
+	font-family: roboto;
 	margin-top:15px;
 	color:#fff;
 }
@@ -448,4 +466,81 @@ hr { display: block; height: 1px;
 .play-div .option{
 	font-size:90px;
 	color:#fff;
+}
+
+
+.profile-banner {
+	background: url('../img/banner_bg.jpg') no-repeat;
+	background-size: cover;
+	background-position: center center;
+	height: 150px;
+}
+.profile-banner> h4{
+	font-family: roboto-thin;
+	text-align: center;
+	color: #fff;
+	font-size:18px;
+}
+
+.profile-tab {
+	border-width: 0px !important;
+	background-color:#00A79D;
+	font-family: roboto-lt;
+	padding:0px !important;
+}
+
+.person-item h4{
+	text-align: center;
+	font-family: roboto;
+	font-size:13px;
+}
+
+.music-item h4{
+	text-align: center;
+	font-family: roboto;
+	font-size:13px;
+	margin-top:0px;
+	margin-bottom:10px;
+}
+
+.music-item h3{
+	text-align: center;
+	font-family: roboto-lt;
+	font-size:16px;
+	margin-top:5px;
+	margin-bottom:0px;
+}
+
+.post-tl-left {
+	font-size: 20px;
+	text-align: center;
+	color:#00A79D;
+}
+
+.post-tl-left .icon {
+	font-size: 30px;
+}
+
+.post-tl-right {
+	padding-top:0px;
+	margin-top:0px;
+}
+
+.post-tl-right .date {
+	text-align: right;
+	color:#1B75BB;
+}
+
+.post-tl-right .song-title{
+	font-family: roboto-lt;
+	margin-bottom: 0px;
+	font-size:17px;
+	font-color:#000;
+}
+
+.post-tl-right .song-artist{
+	font-family: roboto;
+	margin-bottom: 0px;
+	font-size:14px;
+	font-color:#000;
 }

@@ -17,4 +17,21 @@ angular.module('inklusik.controllers', [])
 
 .controller('PlayCtrl', function($scope, $rootScope, simpleLogin) {
   $rootScope.hide = true;
+})
+
+.controller('TimelineCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('FriendsCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('SearchCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
 });
+

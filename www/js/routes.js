@@ -15,6 +15,26 @@ angular.module('inklusik.routes', ['simpleLogin'])
       url:'/play',
       templateUrl: "templates/play.html",
       controller: 'PlayCtrl'
+    },
+    'timeline': {
+      url:'/timeline',
+      templateUrl: "templates/timeline.html",
+      controller: 'TimelineCtrl'
+    },
+    'friends': {
+      url:'/friends',
+      templateUrl: "templates/friends.html",
+      controller: 'FriendsCtrl'
+    },
+    'search': {
+      url:'/search',
+      templateUrl: "templates/search.html",
+      controller: 'SearchCtrl'
+    },
+    'playlist': {
+      url:'/playlist',
+      templateUrl: "templates/playlist.html",
+      controller: 'PlaylistCtrl'
     }
   })
   
