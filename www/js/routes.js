@@ -9,7 +9,12 @@ angular.module('inklusik.routes', ['simpleLogin'])
     'home': {
       url: "/home",
       templateUrl: "templates/home.html",
-      controller: 'HomeCtrl',
+      controller: 'HomeCtrl'
+    },
+    'play': {
+      url:'/play',
+      templateUrl: "templates/play.html",
+      controller: 'PlayCtrl'
     }
   })
   

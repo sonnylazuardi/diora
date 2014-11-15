@@ -13,4 +13,8 @@ angular.module('inklusik.controllers', [])
 
 .controller('HomeCtrl', function($scope, $rootScope, simpleLogin) {
   $rootScope.hide = true;
+})
+
+.controller('PlayCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
 });
