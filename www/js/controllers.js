@@ -88,6 +88,35 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   };
 })
 
+
 .controller('HomeCtrl', function($scope, $rootScope, simpleLogin) {
     $rootScope.loginShow = true;
+})
+
+.controller('PlayCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('TimelineCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('FriendsCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('SearchCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
+})
+
+.controller('FavoriteCtrl', function($scope, $rootScope, simpleLogin) {
+  $rootScope.hide = true;
 });

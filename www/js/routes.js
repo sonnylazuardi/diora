@@ -15,6 +15,31 @@ angular.module('inklusik.routes', ['simpleLogin'])
       url: "/play/:song_id",
       controller: 'PlayCtrl',
       templateUrl: "templates/play.html"
+    },
+    'timeline': {
+      url:'/timeline',
+      templateUrl: "templates/timeline.html",
+      controller: 'TimelineCtrl'
+    },
+    'friends': {
+      url:'/friends',
+      templateUrl: "templates/friends.html",
+      controller: 'FriendsCtrl'
+    },
+    'search': {
+      url:'/search',
+      templateUrl: "templates/search.html",
+      controller: 'SearchCtrl'
+    },
+    'playlist': {
+      url:'/playlist',
+      templateUrl: "templates/playlist.html",
+      controller: 'PlaylistCtrl'
+    },
+    'trending': {
+      url:'/trending',
+      templateUrl: "templates/trending.html",
+      controller: 'TrendingCtrl'
     }
   })
   
