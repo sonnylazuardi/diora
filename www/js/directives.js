@@ -7,6 +7,20 @@ angular.module('inklusik.directives', []).
     };
   }])
 
+  .directive('noScroll', function($document) {
+
+    return {
+      restrict: 'A',
+      link: function($scope, $element, $attr) {
+
+        $document.on('touchmove', function(e) {
+          e.preventDefault();
+          return false;
+        });
+      }
+    }
+  })
+
   /**
    * A directive that shows elements only when user is logged in.
    */

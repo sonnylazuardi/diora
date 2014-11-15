@@ -5,9 +5,9 @@
       "type": "Import",
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
-      "projectGuid": "b676785a-2c52-48db-a58f-a3156d949908",
-      "lastModifiedDate": 1416058413348,
-      "creationDate": 1416057622309
+      "projectGuid": "2cc007e7-f841-4d4a-9e87-3999645e9419",
+      "lastModifiedDate": 1416029324099,
+      "creationDate": 1416029324029
     },
     "sourceDirectory": "",
     "cordovaPluginsDirectory": "plugins",
@@ -39,44 +39,9 @@
         "paramvals": {}
       },
       {
-        "id": "org.apache.cordova.media",
-        "version": "0.2.10",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
-        "id": "org.apache.cordova.inappbrowser",
-        "version": "0.4.0",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
-        "id": "org.apache.cordova.network-information",
-        "version": "0.2.8",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
-        "id": "org.apache.cordova.dialogs",
-        "version": "0.2.6",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
-        "id": "org.apache.cordova.vibration",
-        "version": "0.3.8",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {}
-      },
-      {
         "id": "org.apache.cordova.splashscreen",
         "version": "0.3.0",
-        "selectedState": "Included",
+        "selectedState": "Auto",
         "data": {},
         "paramvals": {}
       }
@@ -94,7 +59,7 @@
         },
         "isActive_": true,
         "appName_": "Diora",
-        "appID_": "com.diora.diora",
+        "appID_": "not.yet.specified",
         "appAccess_": "*",
         "icons_": [],
         "splashes_": [],
@@ -104,8 +69,7 @@
         "cordovaCLIVersion_": "3.5",
         "appVersion_": "0.0.1",
         "appVersionCode_": "1",
-        "crosswalkVersion_": "stable",
-        "appDescription_": "the way to discover new music"
+        "crosswalkVersion_": "stable"
       },
       "Android-Crosswalk": {
         "platform_": "android",

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Inklusik</title>
+    <title>Diora</title>
 
     <link href="css/ionic.app.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -14,11 +14,17 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/jquery.min.js"></script>
+    <script src="lib/jquery.knob.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/firebase.js"></script>
     <script src="lib/firebase-simple-login.js"></script>
+
+    <script src="lib/ionic/js/collide.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/ionic.tdcards.js"></script>
+
     <script src="lib/angular.audio.js"></script>
+    <script src="lib/angular-knob.js"></script>
     <script src="lib/angularfire.min.js"></script>
     <script src="lib/ngStorage.min.js"></script>
 
@@ -47,16 +53,16 @@
 
     <ion-side-menus>
       <!-- Center content -->
-      <ion-side-menu-content>
+      <ion-side-menu-content drag-content="false">
         <ion-nav-bar class="bar-stable nav-title-slide-ios7">
           <ion-nav-buttons side="left">
             <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
           </ion-nav-buttons>
           <ion-nav-buttons side="right">
-            <a href="#/search"><button class="button button-icon icon ion-search"></button></a>
+            <a href="#/play"><button class="button button-icon icon ion-search"></button></a>
           </ion-nav-buttons>
         </ion-nav-bar>
-        <ion-nav-view animation="slide-left-right"></ion-nav-view>
+        <ion-nav-view animation="slide-left-right" ></ion-nav-view>
       </ion-side-menu-content>
 
       <!-- Left menu -->

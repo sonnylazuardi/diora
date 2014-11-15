@@ -3,7 +3,6 @@ angular.module('inklusik', [
   'ionic',
   'firebase',
   'ngStorage',
-  'ngAudio',
   'ngCordova',
   'inklusik.config',
   'inklusik.routes',
@@ -17,9 +16,6 @@ angular.module('inklusik', [
 .run(function(simpleLogin, $ionicPlatform, $state) {
   simpleLogin.getUser();
   $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }

@@ -230,12 +230,11 @@ angular.module('ngAudio', [])
                     $volumeToSet = undefined;
                 }
 
-
-
                 audioObject.currentTime = audio.currentTime;
                 audioObject.duration = audio.duration;
                 audioObject.remaining = audio.duration - audio.currentTime;
                 audioObject.progress = audio.currentTime / audio.duration;
+
                 audioObject.src = audio.src;
                 audioObject.paused = audio.paused;
 
@@ -252,6 +251,7 @@ angular.module('ngAudio', [])
 }])
 
 .service('ngAudio', ['ngAudioObject', 'ngAudioGlobals',function(ngAudioObject, ngAudioGlobals) {
+
     this.play = function(id) {
         var audio = new ngAudioObject(id);
         audio.play();
