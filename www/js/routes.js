@@ -40,6 +40,11 @@ angular.module('inklusik.routes', ['simpleLogin'])
       url:'/trending',
       templateUrl: "templates/trending.html",
       controller: 'TrendingCtrl'
+    },
+    'statistic': {
+      url:'/statistic',
+      templateUrl: "templates/statistic.html",
+      controller: 'StatCtrl'
     }
   })
   
