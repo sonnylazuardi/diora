@@ -4,10 +4,18 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
   var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
   var self = this;
   self.player = null;
+   self.arrayku = [
+     'music/SomeoneLikeYou.mp3',
+     'music/SetFireToTheRain.mp3',
+   ];
+  self.ctr = 0;
   self.play = function(url) {
     if (self.player)
       self.player.stop();
+    
     self.player = ngAudio.play(url);
+      // self.player = ngAudio.play(self.arrayku[self.ctr]);
+     self.ctr = +!self.ctr;
   }
   self.getPlayer = function() {
     return self.player;

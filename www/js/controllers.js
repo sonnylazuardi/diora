@@ -196,7 +196,7 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   }
 })
 
-.controller('SearchCtrl', function($scope, $rootScope, simpleLogin,Search) {
+.controller('SearchCtrl', function($scope, $rootScope, simpleLogin,Search,Playlist, $location) {
   if (!$rootScope.auth)
   	$rootScope.loginShow = true;
   $scope.search = function(){
@@ -205,14 +205,28 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
 		$scope.data = data;
   	});
   }
+  $scope.go = function(song_id) {
+    Playlist.songList = _.shuffle(_.map($scope.data, function(item) {
+        return item.SongID;
+    }));
+    Playlist.songList.shift(song_id);
+    $location.path('/play/'+song_id);
+  }
 })
 
-.controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin, Song) {
+.controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin, Song,Playlist, $location) {
   if (!$rootScope.auth)
   	$rootScope.loginShow = true;
   Song.getLikedSong().then(function(data){
   	$scope.data = data;
   });
+  $scope.go = function(song_id) {
+    Playlist.songList = _.shuffle(_.map($scope.data, function(item) {
+        return item.SongID;
+    }));
+    Playlist.songList.shift(song_id);
+    $location.path('/play/'+song_id);
+  }
 })
 
 .controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend, $location, Playlist) {
