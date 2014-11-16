@@ -1,16 +1,35 @@
 angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
 
-.service('Player', function(ngAudio, ngAudioObject, $cordovaMedia) {
-    function Player (url) {
-      return ngAudio.play(url);
-    }
-    return Player;
+.factory('Player', function(ngAudio, ngAudioObject, $cordovaMedia) {
+  var app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1;
+  var self = this;
+  self.player = null;
+  self.play = function(url) {
+    if (self.player)
+      self.player.stop();
+    self.player = ngAudio.play(url);
+  }
+  self.getPlayer = function() {
+    return self.player;
+  }
+  return self;
+    // function Player (url) {
+
+    //   return ngAudio.play(url);
+    // }
+    // return Player;
 })
 
 .factory('User', function() {
   var self = this;
   self.user_id = '4567';
   self.type = 'migme';
+  return self;
+})
+
+.factory('Playlist', function() {
+  var self = this;
+  self.songList = [];
   return self;
 })
 
@@ -50,6 +69,15 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
     var def = $q.defer();
     $http.get(serverUrl+'like/status/'+User.type+'/'+User.user_id+'/'+song_id).success(function(data) {
       def.resolve(data.data);
+    });
+    return def.promise;
+  }
+  self.discover = function() {
+    var def = $q.defer();
+    $http.get(serverUrl+'music/discover').success(function(data) {
+      if (data.data) {
+        def.resolve(data.data);
+      }
     });
     return def.promise;
   }
