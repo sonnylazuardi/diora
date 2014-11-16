@@ -9,29 +9,11 @@
       </div>
     </div> -->
     <div class="row unlimited-items music-item">
-        <div class="col">
-          <div style="background: url('img/linkinpark.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;">
+        <div class="col" ng-repeat="song in data">
+          <div style="background: url('{{song.CoverArtFilename}}'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;" ng-click="go({{song.SongID}})">
           </div>
-          <h3>Castle of Glass</h3>
-          <h4>Linkin Park</h4>
-        </div>
-        <div class="col">
-          <div style="background: url('img/linkinpark.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;">
-          </div>
-          <h3>Lost in the Echo</h3>
-          <h4>Linkin Park</h4>
-        </div>
-        <div class="col">
-          <div style="background: url('img/album.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;">
-          </div>
-          <h3>Warriors</h3>
-          <h4>Imagine Dragons</h4>
-        </div>
-        <div class="col">
-          <div style="background: url('img/raisa.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;">
-          </div>
-          <h3>Serba Salah</h3>
-          <h4>Raisa</h4>
+          <h3>{{song.SongName}}</h3>
+          <h4>{{song.ArtistName}}</h4>
         </div>
       </div>
   </ion-content>

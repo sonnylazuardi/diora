@@ -56,7 +56,21 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
   self.getLikedSong = function(){
     var def = $q.defer();
     $http.get(serverUrl+'like/my/'+User.type+'/'+User.user_id).success(function(data) {
-      def.resolve(data.data);
+      var list = data.data;
+      var dataLengkap = [];
+      for (var i=0;i<list.length;i++){
+        $http.get(serverUrl+'music/'+list[i].song_id+'/details').success(function(data){
+          var song = data.data;
+          console.log(data);
+          if (song.CoverArtFilename != null && song.CoverArtFilename != "")
+            song.CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song.CoverArtFilename;
+          else 
+            song.CoverArtFilename = 'img/album.jpg';
+          dataLengkap.push(data.data);
+        });
+      }
+      def.resolve(dataLengkap);
+      //def.resolve(data.data);
     });
     return def.promise;
   }
