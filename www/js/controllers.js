@@ -2,11 +2,20 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
 
 .controller('LoginCtrl', function($scope, $rootScope, simpleLogin) {
     $rootScope.loginShow = true;
+    $rootScope.auth = false;
+    $rootScope.MigmeLogin = function(){
+    	$rootScope.loginShow = false;
+    	$rootScope.auth = true;
+    }
 })
 
 .controller('MenuCtrl', function($scope, fbutil, requireUser, simpleLogin, $rootScope, $state) {
     $scope.exit = function() {
         navigator.app.exitApp();
+    }
+    $scope.logout = function() {
+    	$rootScope.loginShow = true;
+    	$rootScope.auth = false;
     }
 })
 
@@ -117,19 +126,47 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
 
 
 .controller('HomeCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.loginShow = false;
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
 })
 
 .controller('TimelineCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.loginShow = false;
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
+  $scope.likeStatus = [];
+  $scope.numberOfLike = [];
+  $scope.showFriends = 0;
+    $scope.toggleLike = function(rID) {
+    	if ($scope.likeStatus[rID] == null){
+    		$scope.likeStatus[rID] = 0;
+    		$scope.numberOfLike[rID] = 0;
+    	}
+    	console.log('Hello ' + rID + ' ' + $scope.likeStatus[rID]);
+        $scope.likeStatus[rID] = +!$scope.likeStatus[rID];
+        if ($scope.likeStatus[rID]) {
+            $scope.numberOfLike[rID]++;
+        } else {
+            $scope.numberOfLike[rID]--;
+        }
+    }
+    $scope.showFriendsFunc = function(val){
+    	$scope.showFriends = val;
+    }
 })
 
 .controller('FriendsCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.loginShow = false;
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
+  $scope.showFollowers = 0;
+  $scope.showFollowersFunc = function(val){
+  	console.log("oit");
+  	$scope.showFollowers = val;
+  }
 })
 
 .controller('SearchCtrl', function($scope, $rootScope, simpleLogin,Search) {
-  $rootScope.loginShow = false;
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
   $scope.search = function(){
   	console.log($scope.search.query);
   	Search.search($scope.search.query).then(function(data){
@@ -138,12 +175,17 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   }
 })
 
-.controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.loginShow = false;
+.controller('PlaylistCtrl', function($scope, $rootScope, simpleLogin, Song) {
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
+  Song.getLikedSong().then(function(data){
+  	$scope.data = data;
+  });
 })
 
 .controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend, $location) {
-  $rootScope.loginShow = false;
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
  
   Trend.getToday().then(function(data){
   	$scope.dataToday = data;
@@ -158,5 +200,15 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
 })
 
 .controller('FavoriteCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.hide = true;
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
+})
+
+.controller('StatCtrl', function($scope, $rootScope, simpleLogin) {
+  if (!$rootScope.auth)
+  	$rootScope.loginShow = true;
+  $scope.showStats = 0;
+  $scope.showStatsFunc = function(val){
+  	$scope.showStats = val;
+  }
 });

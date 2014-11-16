@@ -53,6 +53,13 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
     });
     return def.promise;
   }
+  self.getLikedSong = function(){
+    var def = $q.defer();
+    $http.get(serverUrl+'like/my/'+User.type+'/'+User.user_id).success(function(data) {
+      def.resolve(data.data);
+    });
+    return def.promise;
+  }
   return self;
 })
 
