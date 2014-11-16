@@ -143,7 +143,7 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   $rootScope.loginShow = false;
 })
 
-.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend) {
+.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend, $location) {
   $rootScope.loginShow = false;
  
   Trend.getToday().then(function(data){
@@ -152,6 +152,10 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   Trend.getThisMonth().then(function(data){
   	$scope.dataThisMonth = data; 
   });
+
+  $scope.go = function(song_id) {
+    $location.path('/play/'+song_id);
+  }
 })
 
 .controller('FavoriteCtrl', function($scope, $rootScope, simpleLogin) {

@@ -20,13 +20,15 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
     var def = $q.defer();
     console.log(serverUrl+'music/'+song_id+'/details');
     $http.get(serverUrl+'music/'+song_id+'/details').success(function(data) {
-      console.log(data);  
-      var song = data.data;
-      song.CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song.CoverArtFilename;
-      $http.get(serverUrl+'music/'+song_id+'/stream').success(function(data2) {
-        song.filename = data2.data.url;
-        def.resolve(song);
-      });
+      if (data.data) {
+        var song = data.data;
+        if (song)
+          song.CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song.CoverArtFilename;
+        $http.get(serverUrl+'music/'+song_id+'/stream').success(function(data2) {
+          song.filename = data2.data.url;
+          def.resolve(song);
+        });
+      }
     });
     return def.promise;
   }
