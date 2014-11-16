@@ -107,10 +107,9 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
 
 .controller('SearchCtrl', function($scope, $rootScope, simpleLogin,Search) {
   $rootScope.loginShow = false;
-  $scope.qsearch = '';
   $scope.search = function(){
-  	console.log($scope.qsearch);
-  	Search.search($scope.qsearch).then(function(data){
+  	console.log($scope.search.query);
+  	Search.search($scope.search.query).then(function(data){
 		$scope.data = data;
   	});
   }
