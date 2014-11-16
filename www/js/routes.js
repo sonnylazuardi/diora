@@ -63,7 +63,7 @@ angular.module('inklusik.routes', ['simpleLogin'])
       }
     });
     // routes which are not in our map are redirected to /home
-    $urlRouterProvider.otherwise('/play');
+    $urlRouterProvider.otherwise('/home');
   })
 
   .run(function($rootScope, $location, simpleLogin, ROUTES, loginRedirectPath) {

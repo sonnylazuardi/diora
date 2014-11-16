@@ -7,27 +7,51 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
     return Player;
 })
 
-.factory('Song', function($http, serverUrl, $q) {
+.factory('User', function() {
+  var self = this;
+  self.user_id = '4567';
+  self.type = 'migme';
+  return self;
+})
+
+.factory('Song', function($http, serverUrl, $q, User) {
   var self = this;
   self.getById = function(song_id) {
     var def = $q.defer();
     console.log(serverUrl+'music/'+song_id+'/details');
     $http.get(serverUrl+'music/'+song_id+'/details').success(function(data) {
-      console.log(data);  
-      var song = data.data;
-      song.CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song.CoverArtFilename;
-      $http.get(serverUrl+'music/'+song_id+'/stream').success(function(data2) {
-        song.filename = data2.data.url;
-        def.resolve(song);
-      });
+      if (data.data) {
+        var song = data.data;
+        if (song)
+          song.CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song.CoverArtFilename;
+        $http.get(serverUrl+'music/'+song_id+'/stream').success(function(data2) {
+          song.filename = data2.data.url;
+          def.resolve(song);
+        });
+      }
     });
     return def.promise;
   }
-  self.like = function() {
-    $http.get(serverUrl+'music/');
+  self.like = function(song_id) {
+    // like/{type}/{user_id}/{song_id}
+    $http.get(serverUrl+'like/'+User.type+'/'+User.user_id+'/'+song_id);
   }
-  self.dislike = function() {
-    $http.get(''); 
+  self.unlike = function(song_id) {
+    // like/{type}/{user_id}/{song_id}
+    $http.get(serverUrl+'unlike/'+User.type+'/'+User.user_id+'/'+song_id);
+  }
+  self.dislike = function(song_id) {
+    $http.get(serverUrl+'dislike/'+User.type+'/'+User.user_id+'/'+song_id); 
+  }
+  self.undislike = function(song_id) {
+    $http.get(serverUrl+'undislike/'+User.type+'/'+User.user_id+'/'+song_id); 
+  }
+  self.likeStatus = function(song_id) {
+    var def = $q.defer();
+    $http.get(serverUrl+'like/status/'+User.type+'/'+User.user_id+'/'+song_id).success(function(data) {
+      def.resolve(data.data);
+    });
+    return def.promise;
   }
   return self;
 })
@@ -36,9 +60,18 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
   var self = this;
   self.get = function(artist, title) {
     var def = $q.defer();
-    $http.get(serverUrl+'music/lyric/'+artist+'/'+title).success(function(data) {
-      var text = $(data).find('pre').html();
-      def.resolve(text);
+    console.log(serverUrl+'lyric/'+artist+'/'+title);
+    $http.get(serverUrl+'lyric/'+artist+'/'+title).success(function(data) {
+      var parser = $.parseHTML(data);
+      // var text = parser.find('pre');
+      // console.log($(parser[7]).text());
+      if (parser) {
+        var text = $(parser[7]).html();
+        text = text.replace(/\n/g, "<br>");
+        def.resolve(text);
+      } else {
+        def.resolve('');
+      }
     });
     return def.promise;
   }

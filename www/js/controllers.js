@@ -15,17 +15,41 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
     $rootScope.playShow = true;
 
     var song_id = $stateParams.song_id;
+    $scope.songList = {
+        song_id: song_id
+    };
     $scope.song;
     $scope.audioPlaying;
     console.log(song_id);
     $scope.lyric = '';
+    $scope.likeStatus = {love:0, hate:0};
+    $scope.toggleLike = function() {
+        $scope.likeStatus.love = +!$scope.likeStatus.love;
+        if ($scope.likeStatus.love) {
+            Song.like($scope.songList.song_id);
+        } else {
+            Song.unlike($scope.songList.song_id);
+        }
+    }
+    $scope.toggleDislike = function() {
+        $scope.likeStatus.hate = +!$scope.likeStatus.hate;
+        if ($scope.likeStatus.hate) {
+            Song.dislike($scope.songList.song_id);
+        } else {
+            Song.undislike($scope.songList.song_id);
+        }
+    }
     Song.getById(song_id).then(function(data) {
         $scope.song = data;
         $scope.audioPlaying = Player($scope.song.filename);
         timer = timerFunc;
         $scope.isPlaying = true;
         Lyric.get(data.ArtistName, data.SongName).then(function(data2) {
+            console.log(data2);
             $scope.lyric = data2;
+        });
+        Song.likeStatus(song_id).then(function(data3) {
+            $scope.likeStatus = data3;
         });
     });
     
@@ -72,28 +96,27 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
     }, 100);
 
     $scope.changeProgress = function(val) {
-        $scope.audioPlaying.setProgress(val/100);
+        console.log(val);
+        $scope.audioPlaying.setProgress(parseInt(val)/100);
         timer = timerFunc;
     }
 })
 
-.controller('CardCtrl', function($scope, TDCardDelegate) {
+.controller('CardCtrl', function($scope, TDCardDelegate, Song) {
   $scope.cardSwipedLeft = function(index) {
     console.log('LEFT SWIPE');
+    Song.dislike($scope.songList.song_id);
     // $scope.addCard();
   };
   $scope.cardSwipedRight = function(index) {
     console.log('RIGHT SWIPE');
+    Song.like($scope.songList.song_id);
     // $scope.addCard();
   };
 })
 
 
 .controller('HomeCtrl', function($scope, $rootScope, simpleLogin) {
-  $rootScope.loginShow = false;
-})
-
-.controller('PlayCtrl', function($scope, $rootScope, simpleLogin) {
   $rootScope.loginShow = false;
 })
 
@@ -119,7 +142,7 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   $rootScope.loginShow = false;
 })
 
-.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend) {
+.controller('TrendingCtrl', function($scope, $rootScope, simpleLogin, Trend, $location) {
   $rootScope.loginShow = false;
  
   Trend.getToday().then(function(data){
@@ -128,6 +151,10 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
   Trend.getThisMonth().then(function(data){
   	$scope.dataThisMonth = data; 
   });
+
+  $scope.go = function(song_id) {
+    $location.path('/play/'+song_id);
+  }
 })
 
 .controller('FavoriteCtrl', function($scope, $rootScope, simpleLogin) {
