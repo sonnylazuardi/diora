@@ -4,6 +4,7 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
     $rootScope.loginShow = true;
     $rootScope.auth = false;
     $rootScope.MigmeLogin = function(){
+    	window.open('http://diora.suitdev.com/authorize-migme');
     	$rootScope.loginShow = false;
     	$rootScope.auth = true;
     }

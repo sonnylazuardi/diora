@@ -24,6 +24,7 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
   var self = this;
   self.user_id = '4567';
   self.type = 'migme';
+  self.migme_id = '211282416';
   return self;
 })
 
@@ -54,6 +55,19 @@ angular.module('inklusik.services', ['ngAudio', 'ngCordova'])
   self.like = function(song_id) {
     // like/{type}/{user_id}/{song_id}
     $http.get(serverUrl+'like/'+User.type+'/'+User.user_id+'/'+song_id);
+    $http.get(serverUrl+'music/'+song_id+'/details').success(function(data) {
+      if (data.data) {
+        var song = data.data;
+        if (song)
+          song.CoverArtFilename = 'http://images.gs-cdn.net/static/albums/' + song.CoverArtFilename;
+        $http.get(serverUrl+'music/'+song_id+'/stream').success(function(data2) {
+          song.filename = data2.data.url;
+        });
+        $http.post(serverUrl+ 'migme_post' + '/' + User.migme_id + '?body=likes ' + song.ArtistName + ' - ' + song.SongName + '&privacy=0&reply_permission=0&originality=1');
+      }
+    });
+    
+    
   }
   self.unlike = function(song_id) {
     // like/{type}/{user_id}/{song_id}
