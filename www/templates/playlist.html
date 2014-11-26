@@ -10,7 +10,7 @@
     </div> -->
     <div class="row unlimited-items music-item">
         <div class="col" ng-repeat="song in data">
-          <div style="background: url('{{song.CoverArtFilename}}'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;" ng-click="go({{song.SongID}})">
+          <div style="background: url('{{song.CoverArtFilename}}'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100px; width: 100px; background-color: #fff; border-radius:10%; margin: 0px auto; padding-top:15px;" ng-click="go(song.SongID)">
           </div>
           <h3>{{song.SongName}}</h3>
           <h4>{{song.ArtistName}}</h4>
