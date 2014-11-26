@@ -1,4 +1,4 @@
-angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob'])
+angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob', 'ngCordova'])
 
 .controller('LoginCtrl', function($scope, $rootScope, simpleLogin) {
     $rootScope.loginShow = true;
@@ -58,21 +58,43 @@ angular.module('inklusik.controllers', ['ionic.contrib.ui.tinderCards', 'ui.knob
         }
     };
 
+    $scope.mediaTimer = null;
+
     Song.getById($scope.songInfo.song_id).then(function(data) {
         $scope.song = data;
-        Player.play($scope.song.filename)
-        $scope.audioPlaying = Player.getPlayer();
-        console.log($scope.audioPlaying);
-        $scope.audioPlaying.ontimeupdate = function() {
-          $scope.progressBar = parseInt($scope.audioPlaying.currentTime / $scope.audioPlaying.duration * 100);
-          $scope.$apply();
-        }
+        Player.play($scope.song.filename);
 
-        $scope.audioPlaying.onended = function() {
-          console.log('beres');
-          $scope.nextSong();
-        }
-        $scope.isPlaying = true;
+        Player.getPlayer().then(function(my_player) {
+          $scope.audioPlaying = my_player;
+          console.log('audio : ');
+          console.log($scope.audioPlaying);
+          if (my_player.is_app) {
+            $scope.mediaTimer = setInterval(function () {
+              my_player.getCurrentPosition(
+                function (position) {
+                  if (position > -1) {
+                    $scope.progressBar = parseInt(position / my_player.getDuration() * 100);
+                    $scope.$apply();
+                  }
+                }
+              );
+            }, 800);
+          } else {
+            $scope.audioPlaying.ontimeupdate = function() {
+              $scope.progressBar = parseInt($scope.audioPlaying.currentTime / $scope.audioPlaying.duration * 100);
+              $scope.$apply();
+            }
+
+            $scope.audioPlaying.onended = function() {
+              console.log('beres');
+              $scope.nextSong();
+            }
+          }
+
+          $scope.isPlaying = true;
+        });
+
+
         Lyric.get(data.ArtistName, data.SongName).then(function(data2) {
             console.log(data2);
             $scope.lyric = data2;

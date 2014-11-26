@@ -1,9 +1,0 @@
-{
-    "jscodehints.detectedExclusions": [
-        "C:/wamp/www/diora/www/lib/underscore-min.js",
-        "C:/wamp/www/diora/www/lib/ionic/js/ionic.bundle.js",
-        "C:/wamp/www/diora/www/lib/ionic/js/angular/angular.js",
-        "C:/wamp/www/diora/www/lib/ionic/js/angular/angular.min.js",
-        "C:/wamp/www/diora/www/lib/ngStorage.min.js"
-    ]
-}
